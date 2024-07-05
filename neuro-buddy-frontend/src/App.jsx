@@ -1,9 +1,10 @@
 import "./App.css";
+import ChatUI from "./components/ChatUI.jsx";
 
 function App() {
   return (
     <>
-      <h1>HELLO</h1>
+      <ChatUI />
     </>
   );
 }
