@@ -1,10 +1,16 @@
 import React from "react";
 import Nav from "./Nav";
+import Sidebar from "./Sidebar";
+import ChatArea from "./ChatArea";
 
 const ChatUI = () => {
   return (
     <>
       <Nav />
+      <div className="flex">
+        <Sidebar />
+        <ChatArea />
+      </div>
       {/* <div className="min-h-screen bg-gray-900 text-white flex justify-center items-center">
         <div className="w-full max-w-4xl p-4 border border-gray-700 rounded-lg">
           <div className="flex justify-between items-center mb-4">
