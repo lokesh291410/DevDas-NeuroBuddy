@@ -45,10 +45,22 @@ const ChatArea = () => {
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`p-2 rounded-lg m-2 ${
-                msg.sender === "User" ? "bg-blue-500" : "bg-green-500"
+              className={`p-2 rounded-lg m-2 text-extrabold ${
+                msg.role === "user"
+                  ? "bg-green-500/30 backdrop-blur-md border border-green-500 text-white"
+                  : "bg-blue-500/30 backdrop-blur-md border border-blue-500 text-white"
               }`}
-              style={{ maxWidth: "50%", wordWrap: "break-word" }}
+              style={{
+                maxWidth: "50%",
+                wordWrap: "break-word",
+                ...(msg.role === "user"
+                  ? {
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                      backdropFilter: "blur(10px)",
+                      WebkitBackdropFilter: "blur(10px)",
+                    }
+                  : {}),
+              }}
             >
               {msg.message}
             </div>
