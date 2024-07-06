@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Dr. Ravi Kumar",
+    "gender": "Male",
+    "hospital": "Apollo Hospital",
+    "uid": "NB001M",
+    "email": "ravi.kumar@Devdas.in"
+  },
+  {
+    "name": "Dr. Priya Singh",
+    "gender": "Female",
+    "hospital": "Fortis Hospital",
+    "uid": "NB002F",
+    "email": "priya.singh@Devdas.in"
+  },
+  {
+    "name": "Dr. Anjali Mehta",
+    "gender": "Female",
+    "hospital": "AIIMS",
+    "uid": "NB003F",
+    "email": "anjali.mehta@Devdas.in"
+  },
+  {
+    "name": "Dr. Vikram Sharma",
+    "gender": "Male",
+    "hospital": "Max Healthcare",
+    "uid": "NB004M",
+    "email": "vikram.sharma@Devdas.in"
+  },
+  {
+    "name": "Dr. Sushmita Iyer",
+    "gender": "Female",
+    "hospital": "Manipal Hospital",
+    "uid": "NB005F",
+    "email": "sushmita.iyer@Devdas.in"
+  },
+  {
+    "name": "Dr. Arjun Patel",
+    "gender": "Male",
+    "hospital": "Narayana Health",
+    "uid": "NB006M",
+    "email": "arjun.patel@Devdas.in"
+  },
+  {
+    "name": "Dr. Kavita Reddy",
+    "gender": "Female",
+    "hospital": "Care Hospitals",
+    "uid": "NB007F",
+    "email": "kavita.reddy@Devdas.in"
+  },
+  {
+    "name": "Dr. Rajesh Verma",
+    "gender": "Male",
+    "hospital": "Medanta",
+    "uid": "NB008M",
+    "email": "rajesh.verma@Devdas.in"
+  },
+  {
+    "name": "Dr. Nisha Gupta",
+    "gender": "Female",
+    "hospital": "Kokilaben Dhirubhai Ambani Hospital",
+    "uid": "NB009F",
+    "email": "nisha.gupta@Devdas.in"
+  },
+  {
+    "name": "Dr. Sanjay Deshmukh",
+    "gender": "Male",
+    "hospital": "Lilavati Hospital",
+    "uid": "NB010M",
+    "email": "sanjay.deshmukh@Devdas.in"
+  }
+]
