@@ -1,32 +1,46 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import maleImage from "../assets/male.png";
 import femaleImage from "../assets/female.png";
-import PatientData from "../../../PatientData.json";
+import PatientData from "../../../diagnosData.json";
 
 function Sidebar() {
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [selectedPatient, setSelectedPatient] = useState(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * PatientData.length);
-    setSelectedDoctor(PatientData[randomIndex]);
+    setSelectedPatient(PatientData[randomIndex]);
   }, []);
 
-  if (!selectedDoctor) {
-    return null;
+  if (!selectedPatient) {
+    return null; // or render a loading indicator
   }
 
-  const { gender, name, condition, uid } = selectedDoctor;
+  const { patient, assessment } = selectedPatient;
+  const { gender, name, age, contact } = patient;
 
   const handleImageLoad = () => {
     setImageLoaded(true);
+  };
+
+  const handleViewReport = () => {
+    if (assessment && assessment.uid) {
+      navigate(`/report/${assessment.uid}`);
+    }
+  };
+
+  const handleSubmit = () => {
+    // Placeholder for session functionality
+    alert(`Session started for ${name}`);
   };
 
   return (
     <div className="flex flex-col w-1/4 mb-4 ml-2 mr-2 border border-slate-400 p-4 rounded-xl justify-start items-center">
       <h1 className="text-white font-bold text-xl">PATIENT INFO</h1>
       <img
-        src={gender === "Male" ? maleImage : femaleImage}
+        src={gender === "female" ? femaleImage : maleImage}
         alt={gender}
         className="w-1/2"
         onLoad={handleImageLoad}
@@ -44,27 +58,33 @@ function Sidebar() {
               </tr>
               <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:border-white">
                 <th className="py-4 px-6 font-thin text-gray-900 whitespace-nowrap dark:text-white">
-                  Condition
+                  Age
                 </th>
-                <td className="py-4 px-6 font-semibold text-white">
-                  {condition}
-                </td>
+                <td className="py-4 px-6 font-semibold text-white">{age}</td>
               </tr>
               <tr className="bg-white dark:bg-gray-800 hover:border-white">
                 <th className="py-4 px-6 font-thin text-gray-900 whitespace-nowrap dark:text-white">
-                  UID
+                  Contact
                 </th>
-                <td className="py-4 px-6 font-semibold text-white">{uid}</td>
+                <td className="py-4 px-6 font-semibold text-white">
+                  {contact}
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       )}
       <div className="flex flex-col justify-start items-center space-y-2 m-6  mb-2 py-2 mx-2">
-        <button className="bg-gray-800 px-4 py-2  rounded-lg text-white font-bold hover:bg-gray-700 active:bg-green-950">
+        <button
+          className="bg-gray-800 px-4 py-2 rounded-lg text-white font-bold hover:bg-gray-700 active:bg-green-950"
+          onClick={handleSubmit}
+        >
           SESSION
         </button>
-        <button className="bg-gray-800 px-4 py-2  rounded-lg text-white font-bold hover:bg-gray-700 active:bg-green-950">
+        <button
+          className="bg-gray-800 px-4 py-2 rounded-lg text-white font-bold hover:bg-gray-700 active:bg-green-950"
+          onClick={handleViewReport}
+        >
           VIEW REPORT
         </button>
       </div>
