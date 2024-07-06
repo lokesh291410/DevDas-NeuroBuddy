@@ -1,11 +1,10 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { usePatientData } from "./PatientDataContext";
+import diagnosData from "../../../diagnosData.json";
 
 const Report = () => {
   const { uid } = useParams();
-  const patientData = usePatientData();
-  const data = patientData.find((patient) => patient.assessment.uid === uid);
+  const data = diagnosData.find((patient) => patient.assessment.uid === uid);
 
   if (!data) {
     return (
@@ -53,19 +52,21 @@ const Report = () => {
         <hr />
         <p>Date: {assessment.date}</p>
         <p>Psychologist: {assessment.psychologist}</p>
+      </section>
 
+      <section className="mb-6">
         <h3 className="text-lg font-bold">Referral Questions</h3>
+        <hr />
         <ul className="list-disc ml-6">
           {assessment.referral_questions.map((question, index) => (
             <li key={index}>{question}</li>
           ))}
         </ul>
-
         <p>Observations: {assessment.observations}</p>
         <p>Behavioral Observations: {assessment.behavioral_observations}</p>
         <p>Probable Diagnosis: {assessment.probable_diagnosis.primary}</p>
-
         <h3 className="text-lg font-bold">Recommendations</h3>
+        <hr />
         <ul className="list-disc ml-6">
           {assessment.recommendations.map((recommendation, index) => (
             <li key={index}>{recommendation}</li>

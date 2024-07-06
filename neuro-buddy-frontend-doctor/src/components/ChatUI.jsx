@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Nav from "./Nav";
 import Sidebar from "./Sidebar";
-import PatientData from "../../../PatientData.json";
+import diagnosData from "../../../diagnosData.json";
 
 const ChatUI = () => {
   const scrollContainerRef = useRef(null);
@@ -14,7 +14,7 @@ const ChatUI = () => {
     scrollContainerRef.current.scrollBy({ left: 300, behavior: "smooth" });
   };
 
-  const canScroll = PatientData.length > 3; // Adjust this value based on how many elements you want to show before scrolling is needed
+  const canScroll = diagnosData.length > 3; // Adjust this value based on how many elements you want to show before scrolling is needed
 
   return (
     <>
@@ -33,8 +33,8 @@ const ChatUI = () => {
           ref={scrollContainerRef}
           style={{ scrollBehavior: "smooth" }}
         >
-          {PatientData.map((_, index) => (
-            <Sidebar key={index} />
+          {diagnosData.map((patient, index) => (
+            <Sidebar key={index} patient={patient} />
           ))}
         </div>
         {canScroll && (

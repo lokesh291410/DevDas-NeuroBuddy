@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import maleImage from "../assets/male.png";
 import femaleImage from "../assets/female.png";
-import PatientData from "../../../diagnosData.json";
+import diagnosData from "../../../diagnosData.json";
 
 function Sidebar() {
   const [selectedPatient, setSelectedPatient] = useState(null);
@@ -10,8 +10,8 @@ function Sidebar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * PatientData.length);
-    setSelectedPatient(PatientData[randomIndex]);
+    const randomIndex = Math.floor(Math.random() * diagnosData.length);
+    setSelectedPatient(diagnosData[randomIndex]);
   }, []);
 
   if (!selectedPatient) {
@@ -32,7 +32,6 @@ function Sidebar() {
   };
 
   const handleSubmit = () => {
-    // Placeholder for session functionality
     alert(`Session started for ${name}`);
   };
 
