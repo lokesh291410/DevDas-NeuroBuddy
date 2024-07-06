@@ -1,8 +1,8 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import messages from "../../../democonvo.json";
 
 const ChatArea = () => {
-  const [messages, setMessages] = useState([]);
+  const [messagesList, setMessagesList] = useState(messages || []);
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef(null);
 
@@ -12,7 +12,7 @@ const ChatArea = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messagesList]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -24,49 +24,64 @@ const ChatArea = () => {
       return;
     }
     const userMessage = inputValue;
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { role: "user", message: userMessage },
-    ]);
+    const newMessage = { role: "user", content: userMessage };
+    setMessagesList((prevMessages) => [...prevMessages, newMessage]);
     setInputValue("");
-    //AI response
+    simulateAIResponse();
   };
+
+  const simulateAIResponse = () => {
+    setTimeout(() => {
+      const aiResponse = {
+        role: "assistant",
+        content: "This is a simulated AI response.",
+      };
+      setMessagesList((prevMessages) => [...prevMessages, aiResponse]);
+    }, 1000);
+  };
+
+  const isEmptyChat = messagesList.length === 0;
 
   return (
     <>
       <div
         className="flex flex-col w-3/4 mb-4 mr-5 ml-2 p-4 rounded-xl relative"
-        style={{ height: "86vh" }}
+        style={{ height: "86vh", overflowY: "hidden" }}
       >
-        <div
-          className="flex flex-col items-end overflow-auto "
-          style={{ flexGrow: 1 }}
-        >
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`p-2 rounded-lg m-2 text-extrabold ${
-                msg.role === "user"
-                  ? "bg-green-500/30 backdrop-blur-md border border-green-500 text-white"
-                  : "bg-blue-500/30 backdrop-blur-md border border-blue-500 text-white"
-              }`}
-              style={{
-                maxWidth: "50%",
-                wordWrap: "break-word",
-                ...(msg.role === "user"
-                  ? {
-                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                      backdropFilter: "blur(10px)",
-                      WebkitBackdropFilter: "blur(10px)",
-                    }
-                  : {}),
-              }}
-            >
-              {msg.message}
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
+        {isEmptyChat ? (
+          <div className="flex justify-center items-center h-full text-gray-400">
+            No messages to display.
+          </div>
+        ) : (
+          <div
+            className="flex flex-col items-start overflow-auto"
+            style={{ flexGrow: 1, padding: "2rem", paddingRight: "2rem" }}
+          >
+            {messagesList.map((msg, index) => (
+              <div
+                key={index}
+                className={`p-2 rounded-lg m-2 text-extrabold ${
+                  msg.role === "user"
+                    ? "bg-green-500/30 border border-green-500 text-white self-end"
+                    : "bg-blue-500/30 border border-blue-500 text-white self-start"
+                }`}
+                style={{
+                  maxWidth: "50%",
+                  wordWrap: "break-word",
+                  textAlign: msg.role === "user" ? "right" : "left",
+                  marginLeft: msg.role === "user" ? "auto" : "0",
+                  marginRight: msg.role === "user" ? "0" : "auto",
+                  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                }}
+              >
+                {msg.content}
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+        )}
 
         <form
           onSubmit={handleSubmit}
