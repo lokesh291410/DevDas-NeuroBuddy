@@ -1,4 +1,3 @@
-import "./App.css";
 import ChatUI from "./components/ChatUI.jsx";
 
 function App() {
